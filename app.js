@@ -3,7 +3,8 @@ var volleyball = require('volleyball');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var path = require('path');
-var apiRoutes = require('./routes/api/attractions');
+var attractionsRoutes = require('./routes/api/attractions');
+var dayRoutes = require('./routes/api/days')
 
 var db = require('./models');
 
@@ -27,7 +28,8 @@ app.use('/jquery', express.static(path.join(__dirname, '/node_modules/jquery/dis
 app.use(express.static(path.join(__dirname, '/public')));
 
 //serve api routes
-app.use('/api', apiRoutes);
+app.use('/api/days', dayRoutes);
+app.use('/api', attractionsRoutes);
 
 // serve dynamic routes
 app.use(require('./routes'));
