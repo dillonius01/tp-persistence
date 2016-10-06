@@ -3,7 +3,11 @@ var db = require('./_db');
 
 
 var Day = db.define('day', {
-	number: Sequelize.INTEGER
+	number: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		unique: true
+	}
 });
 
 var DayRestaurant = db.define('dayrestaurant', {

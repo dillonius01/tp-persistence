@@ -26,7 +26,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	// use jquery to submit right number in req.body.num
 	Days.create({
-		number: num
+		number: req.body.num
 	})
 	.then(function(newDay) {
 		res.send(newDay)
@@ -42,16 +42,15 @@ router.put('/', function(req, res, next) {
 
 
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:num', function(req, res, next) {
+	var numToDelete = req.params.num
 	Days.destroy({
 		where: {
-			id: req.params.id
+			number: numToDelete
 		}
 	})
-	.then(function(rowDeleted) {
-		if (rowDeleted.length === 1) {
-			res.send('Successfully removed day')
-		}
+	.then(function(numOfDeletedRows) {
+		res.send(numToDelete);
 	})
 	.catch(next)
 });
