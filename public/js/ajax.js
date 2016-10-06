@@ -66,8 +66,25 @@ function renderAttractions(day) {
 	})
 	.catch(console.error);
 
+$.get('/api/activities')
+	.then(function(activities) {
+		var activityNames = activities.filter(function(activity) {
+			return activity.id === day.activityId
+		})
+		console.log(activityNames);
+
+		//render html with hotel name
+		var hotelHtml = $('<div class="itinerary-item"> \
+			<span class="title">'+ hotelName +'</span>\
+            <button class="btn btn-xs btn-danger remove btn-circle">x</button></div>')
+		$('ul[data-type=hotel]').append(hotelHtml);
+	})
+	.catch(console.error);
 
 }
+
+//when querying day,
+// look up eager loading & include;
 
 //add hotel to My Hotel & day table as hotelID
 

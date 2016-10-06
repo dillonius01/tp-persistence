@@ -2,6 +2,8 @@ var router = require('express').Router();
 var Sequelize = require('sequelize');
 var db = require('../../models');
 var Days = db.model('day');
+var DayActivity = db.model('dayactivity');
+var DayRestaurant = db.model('dayrestaurant');
 
 module.exports = router;
 
@@ -14,6 +16,24 @@ router.get('/', function(req, res, next) {
 	})
 	.catch(next)
 });
+
+// get day-activity table
+router.get('/activities', function(req, res, next) {
+	DayActivity.findAll()
+	.then(function(dayactivities) {
+		res.send(dayactivities)
+	})
+	.catch(next)
+})
+
+// get day-restaurant table
+router.get('/restaurants', function(req, res, next) {
+	DayRestaurant.findAll()
+	.then(function(dayrestaurants) {
+		res.send(dayrestaurants)
+	})
+	.catch(next)
+})
 
 router.get('/:id', function(req, res, next) {
 	Days.findById(req.params.id)
